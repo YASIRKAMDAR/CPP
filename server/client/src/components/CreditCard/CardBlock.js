@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, CardBody, FormGroup, Form, Label, Input  } from 'reactstrap';
-
 import cardRange from "../../config/card/type.js"
+import axios from 'axios';
 
 class CardBlock extends Component {
   constructor (props) {
@@ -20,6 +20,26 @@ class CardBlock extends Component {
         cvvValid: false
       }
     }
+    getCardPost(e)
+    {
+    let cardnum = e.target.value.replace(/\s+/g, '');
+    console.log(cardnum);
+    axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails', 
+      {
+      _eka: cardnum,
+        _ekb:'AE',
+        _ekc:'AED',
+        _ekd:'BRI',
+        _eke:'TXN',
+        _ekf:'TRAN00000000000000001',
+        _ekg:'',
+        _ekh:''
+    }).then(function(res){
+      console.log(res.data);
+      //this.setState({cardtype: res.data._ekv});
+    })
+    }
+
     validateUserInput (e) {
       const name = e.target.name;
       const value = e.target.value;
@@ -183,7 +203,7 @@ class CardBlock extends Component {
                               </Row>
                               <Input  maxLength="23"
                               type="text"  name="cardnumber" id="cardnumber" className="form-control-lg" placeholder="Card Number" resetplaceholder="Card Number" setplaceholder="1234 1234 1234 1234"
-                              onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => this.validateUserInput(event, 'cardnumber') } value={this.state.fakecardnumber}  />
+                              onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => {this.validateUserInput(event, 'cardnumber');this.getCardPost(event) } } value={this.state.fakecardnumber}  />
                               <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
                           </FormGroup>
                           <Row>

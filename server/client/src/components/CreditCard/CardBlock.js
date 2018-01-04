@@ -200,7 +200,7 @@ class CardBlock extends Component {
                           <FormGroup className={this.errorClass(this.state.formErrors.cardnumberError)}>
                               <Row>
                                 <Col sm="2">
-                                  <img src={this.state.cardTypeImage} alt={this.state.cardtype} />
+                                  <img className="cardLogo" src={this.state.cardTypeImage} alt={this.state.cardtype} />
                                 </Col>
                                 <Col sm="10">
                                   <Row>

@@ -199,10 +199,10 @@ class CardBlock extends Component {
                       <Form>
                           <FormGroup className={this.errorClass(this.state.formErrors.cardnumberError)}>
                               <Row>
-                                <Col sm="2">
+                                <Col lg="2" md="2" sm="2" xs="6">
                                   <img className="cardLogo" src={this.state.cardTypeImage} alt={this.state.cardtype} />
                                 </Col>
-                                <Col sm="10">
+                                <Col lg="10" md="10" sm="10" xs="12">
                                   <Row>
                                       <Col sm="6" className="ml-auto error-message">
                                           <div  className="float-right">{this.state.formErrors.cardnumberError}</div>

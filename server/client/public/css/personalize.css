@@ -1,3 +1,10 @@
+body, .container, #LoginBlock .card {
+  background: #f7f7f7 !important;
+	border-color: #c7c7c7 !important;
+}
+#LoginBlock .card input {
+  border-color: #c4c4c4;
+}
 .container
 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -44,7 +51,6 @@ nav input.form-control:active, nav input.form-control:focus,  nav input.form-con
 }
 #LoginBlock.row.comp-block {
     padding-bottom: 80px;
-    padding-top:50px;
 }
 #LoginBlock .card {
     border: 2px solid #f6f6f6;

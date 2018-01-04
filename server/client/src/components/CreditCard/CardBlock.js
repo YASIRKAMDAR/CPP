@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, CardBody, FormGroup, Form, Label, Input  } from 'reactstrap';
-import cardRange from "../../config/card/type.js"
+import {cardRange, cardTypeImages} from "../../config/card/type.js"
 import axios from 'axios';
 
 class CardBlock extends Component {
@@ -13,6 +13,7 @@ class CardBlock extends Component {
         expiry: '',
         fullexpiry: '',
         cvv: '',
+        cardTypeImage: cardTypeImages[''],
         formErrors: {cardnumberError: '', expiryError: '', cvvError: ''},
         cardnumberValid: false,
         expiryValid: false,
@@ -24,7 +25,6 @@ class CardBlock extends Component {
     {
     var self = this;
     let cardnum = e.target.value.replace(/\s+/g, '');
-    console.log(cardnum);
     axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails',
       {
       _eka: cardnum,
@@ -37,7 +37,8 @@ class CardBlock extends Component {
         _ekh:''
     }).then(function(res){
       console.log(res.data);
-      self.setState({cardtype: res.data._ekv});
+      self.setState({cardtype: res.data._ekv,
+                     cardTypeImage: cardTypeImages[res.data._ekv]});
     })
     }
 
@@ -127,7 +128,8 @@ class CardBlock extends Component {
           }
         }
       }
-      this.setState({cardtype: cardtype});
+      this.setState({cardtype: cardtype,
+                    cardTypeImage: cardTypeImages[cardtype]});
     }
 
     validateField(fieldName, value) {
@@ -195,17 +197,24 @@ class CardBlock extends Component {
                 <Card>
                   <CardBody>
                       <Form>
-                          <span>{this.state.cardtype}</span>
                           <FormGroup className={this.errorClass(this.state.formErrors.cardnumberError)}>
                               <Row>
-                                  <Col sm="6" className="ml-auto error-message">
-                                      <div  className="float-right">{this.state.formErrors.cardnumberError}</div>
-                                  </Col>
+                                <Col sm="2">
+                                  <img src={this.state.cardTypeImage} alt={this.state.cardtype} />
+                                </Col>
+                                <Col sm="10">
+                                  <Row>
+                                      <Col sm="6" className="ml-auto error-message">
+                                          <div  className="float-right">{this.state.formErrors.cardnumberError}</div>
+                                      </Col>
+                                  </Row>
+                                  <Input  maxLength="23"
+                                  type="text"  name="cardnumber" id="cardnumber" className="form-control-lg" placeholder="Card Number" resetplaceholder="Card Number" setplaceholder="1234 1234 1234 1234"
+                                  onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => {this.validateUserInput(event, 'cardnumber');this.getCardPost(event) } } value={this.state.fakecardnumber}  />
+                                  <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
+                                </Col>
                               </Row>
-                              <Input  maxLength="23"
-                              type="text"  name="cardnumber" id="cardnumber" className="form-control-lg" placeholder="Card Number" resetplaceholder="Card Number" setplaceholder="1234 1234 1234 1234"
-                              onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => {this.validateUserInput(event, 'cardnumber');this.getCardPost(event) } } value={this.state.fakecardnumber}  />
-                              <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
+
                           </FormGroup>
                           <Row>
                               <Col sm="6">

@@ -5,6 +5,10 @@ body, .container, #LoginBlock .card {
 #LoginBlock .card input {
   border-color: #c4c4c4;
 }
+.error.form-group img.cardLogo {
+    margin-top: 25px;
+}
+
 .container
 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

@@ -14,7 +14,6 @@ ReactDOM.render(
       <div>
         <Route exact path='/' component={App} />
         <Route path='/creditcard' component={CardBlock} />
-        <Route path='/singlecard' component={SingleCardBlock} />
       </div>
   </Router>,
   document.getElementById('root')

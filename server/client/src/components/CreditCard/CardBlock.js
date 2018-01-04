@@ -9,7 +9,7 @@ class CardBlock extends Component {
       this.state = {
         cardnumber: '',
         fakecardnumber:'',
-        cardtype:'UNKNOWN',
+        cardtype:'',
         expiry: '',
         fullexpiry: '',
         cvv: '',
@@ -25,7 +25,7 @@ class CardBlock extends Component {
     var self = this;
     let cardnum = e.target.value.replace(/\s+/g, '');
     console.log(cardnum);
-    axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails', 
+    axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails',
       {
       _eka: cardnum,
         _ekb:'AE',
@@ -50,7 +50,7 @@ class CardBlock extends Component {
           case "cardnumber":
               this.reMapPlaceholder(e);
               let fakecardnumber = value.replace(/[^0-9]/, '');
-              //this.getCardType(fakecardnumber);
+              this.getCardType(fakecardnumber);
               if (fakecardnumber.length > 0) {
                 fakecardnumber = fakecardnumber.replace(/ /g,'').match(/.{1,4}/g).join(" ");
             }
@@ -110,7 +110,7 @@ class CardBlock extends Component {
       let validateLength = value.length;
       let cardtype = this.state.cardtype;
       if (validateLength === 0) {
-        cardtype = "UNKNOWN";
+        cardtype = "";
       }
       else {
         for (var i = 1; i <= validateLength; i++) {

@@ -22,6 +22,7 @@ class CardBlock extends Component {
     }
     getCardPost(e)
     {
+    var self = this;
     let cardnum = e.target.value.replace(/\s+/g, '');
     console.log(cardnum);
     axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails', 
@@ -36,7 +37,7 @@ class CardBlock extends Component {
         _ekh:''
     }).then(function(res){
       console.log(res.data);
-      //this.setState({cardtype: res.data._ekv});
+      self.setState({cardtype: res.data._ekv});
     })
     }
 
@@ -49,7 +50,7 @@ class CardBlock extends Component {
           case "cardnumber":
               this.reMapPlaceholder(e);
               let fakecardnumber = value.replace(/[^0-9]/, '');
-              this.getCardType(fakecardnumber);
+              //this.getCardType(fakecardnumber);
               if (fakecardnumber.length > 0) {
                 fakecardnumber = fakecardnumber.replace(/ /g,'').match(/.{1,4}/g).join(" ");
             }

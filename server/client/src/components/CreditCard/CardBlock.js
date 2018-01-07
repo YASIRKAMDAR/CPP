@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, CardBody, FormGroup, Form, Label, Input  } from 'reactstrap';
-import {cardRange, cardTypeImages} from "../../config/card/type.js"
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 import axios from 'axios';
+
+import {cardRange, cardTypeImages} from "../../config/card/type.js"
 
 class CardBlock extends Component {
   constructor (props) {
@@ -21,25 +25,32 @@ class CardBlock extends Component {
         cvvValid: false
       }
     }
+    cardValidforPost(e) {
+      let cardnum = e.target.value.replace(/\s+/g, '');
+      if (cardnum.length >= 15) {
+          this.getCardPost(e);
+      }
+    }
+
     getCardPost(e)
     {
-    var self = this;
-    let cardnum = e.target.value.replace(/\s+/g, '');
-    axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails',
-      {
-      _eka: cardnum,
-        _ekb:'AE',
-        _ekc:'AED',
-        _ekd:'BRI',
-        _eke:'TXN',
-        _ekf:'TRAN00000000000000001',
-        _ekg:'',
-        _ekh:''
-    }).then(function(res){
-      console.log(res.data);
-      self.setState({cardtype: res.data._ekv,
-                     cardTypeImage: cardTypeImages[res.data._ekv]});
-    })
+      var self = this;
+      let cardnum = e.target.value.replace(/\s+/g, '');
+      axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails',
+        {
+        _eka: cardnum,
+          _ekb:'AE',
+          _ekc:'AED',
+          _ekd:'BRI',
+          _eke:'TXN',
+          _ekf:'TRAN00000000000000001',
+          _ekg:'',
+          _ekh:''
+      }).then(function(res){
+        console.log(res.data);
+        self.setState({cardtype: res.data._ekv,
+                       cardTypeImage: cardTypeImages[res.data._ekv]});
+      })
     }
 
     validateUserInput (e) {
@@ -210,7 +221,7 @@ class CardBlock extends Component {
                                   </Row>
                                   <Input  maxLength="23"
                                   type="text"  name="cardnumber" id="cardnumber" className="form-control-lg" placeholder="Card Number" resetplaceholder="Card Number" setplaceholder="1234 1234 1234 1234"
-                                  onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => {this.validateUserInput(event, 'cardnumber');this.getCardPost(event) } } value={this.state.fakecardnumber}  />
+                                  onChange={(event) => this.validateUserInput(event)} onFocus={(event) => this.mapPlaceholder(event)} onBlur={(event) => {this.cardValidforPost(event) } } value={this.state.fakecardnumber}  />
                                   <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
                                 </Col>
                               </Row>
@@ -251,4 +262,8 @@ class CardBlock extends Component {
   }
 };
 
-export default CardBlock;
+function mapStateToProps({creditcard}) {
+    return {creditcard};
+}
+
+export default connect(mapStateToProps, actions) (CardBlock);

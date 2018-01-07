@@ -3,8 +3,6 @@ import { Row, Col, Card, CardBody, FormGroup, Form, Label, Input  } from 'reacts
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-import axios from 'axios';
-
 import {cardRange, cardTypeImages} from "../../config/card/type.js"
 
 class CardBlock extends Component {
@@ -34,23 +32,18 @@ class CardBlock extends Component {
 
     getCardPost(e)
     {
-      var self = this;
       let cardnum = e.target.value.replace(/\s+/g, '');
-      axios.post('https://pgstaging.emirates.com/restservices/rest/CPGRestService/v1.0/postDetails',
-        {
-        _eka: cardnum,
-          _ekb:'AE',
-          _ekc:'AED',
-          _ekd:'BRI',
-          _eke:'TXN',
-          _ekf:'TRAN00000000000000001',
-          _ekg:'',
-          _ekh:''
-      }).then(function(res){
-        console.log(res.data);
-        self.setState({cardtype: res.data._ekv,
-                       cardTypeImage: cardTypeImages[res.data._ekv]});
-      })
+      var data = {
+      _eka: cardnum,
+        _ekb:'AE',
+        _ekc:'AED',
+        _ekd:'BRI',
+        _eke:'TXN',
+        _ekf:'TRAN00000000000000001',
+        _ekg:'',
+        _ekh:''
+      };
+      this.props.cardPost(data);
     }
 
     validateUserInput (e) {
@@ -62,7 +55,7 @@ class CardBlock extends Component {
           case "cardnumber":
               this.reMapPlaceholder(e);
               let fakecardnumber = value.replace(/[^0-9]/, '');
-              this.getCardType(fakecardnumber);
+              this.props.cardKeyPress({value:fakecardnumber, cardtype:this.props.creditcard.cardtype});
               if (fakecardnumber.length > 0) {
                 fakecardnumber = fakecardnumber.replace(/ /g,'').match(/.{1,4}/g).join(" ");
             }
@@ -211,7 +204,7 @@ class CardBlock extends Component {
                           <FormGroup className={this.errorClass(this.state.formErrors.cardnumberError)}>
                               <Row>
                                 <Col lg="2" md="2" sm="2" xs="6">
-                                  <img className="cardLogo" src={this.state.cardTypeImage} alt={this.state.cardtype} />
+                                <img className="cardLogo" src={this.props.creditcard.cardTypeImage} alt={this.props.creditcard.cardtype} />
                                 </Col>
                                 <Col lg="10" md="10" sm="10" xs="12">
                                   <Row>

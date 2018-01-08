@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import CardBlock from './CreditCard/CardBlock';
 import SingleCardBlock from './CreditCard/SingleCardBlock';
 import BillingAddress from './CreditCard/BillingAddress';
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
-      <div className="container">
-        <CardBlock />
-        <BillingAddress />
-        <SingleCardBlock />
-      </div>
+      <Router>
+        <div className="container">
+          <Route exact={true} path='/' component={CardBlock}  />
+          <Route exact={true} path='/' component={SingleCardBlock} />
+          <Route exact={true} path='/creditcard' component={CardBlock}  />
+          <Route exact={true} path='/singlecard' component={SingleCardBlock} />
+        </div>
+      </Router>
     );
-  }
-}
+};
 
 export default App;

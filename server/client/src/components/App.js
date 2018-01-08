@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import CardBlock from './CreditCard/CardBlock';
 import SingleCardBlock from './CreditCard/SingleCardBlock';
+import BillingAddress from './CreditCard/BillingAddress';
 
 const App = () => {
     return (

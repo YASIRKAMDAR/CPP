@@ -54,8 +54,9 @@ export var cardTypeImages = {
 }
 
 export var CountryInfo = [
+        {"id": 0, "Name": "Select Country","Description": " Select country","states" : [] },
         {"id": 1, "Name": "India","Description": " india Description","states" : [{"id": 11, "Name": "UP","Description": " UP Description"},{"id": 12, "Name": "MP","Description": " MP Description"}] },
-        {"id": 2, "Name": "UAE","Description": " UAE Description","states" : [{"id": 11, "Name": "Dubai","Description": " Dubai Description"},{"id": 12, "Name": "ABU Dhabi","Description": " Abu dhabi Description"}]},
+        {"id": 2, "Name": "UAE","Description": " UAE Description","states" : []},
         {"id": 3, "Name": "USA","Description": " USA Description","states" : [{"id": 11, "Name": "USA1","Description": " USA1 Description"},{"id": 12, "Name": "USA2","Description": " USA2 Description"}]},
         {"id": 4, "Name": "UK","Description": " UK Description","states" : [{"id": 11, "Name": "UK1","Description": " UK1 Description"},{"id": 12, "Name": "UK2","Description": " UK2 Description"}]},
     ];

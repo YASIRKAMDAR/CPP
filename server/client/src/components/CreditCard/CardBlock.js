@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Card, CardBody, FormGroup, Form, Label, Input  } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import BillingAddress from './BillingAddress' 
 
 import {cardRange, cardTypeImages} from "../../config/card/type.js"
 
@@ -23,6 +24,7 @@ class CardBlock extends Component {
         formValid: false,
         cvvValid: false
       }
+      console.log(this.props.location.data);
     }
     cardValidforPost(e) {
       let cardnum = e.target.value.replace(/\s+/g, '');
@@ -196,6 +198,14 @@ class CardBlock extends Component {
    }
 
   render() {
+    var BillingAdd =this.props.creditcard.billingaddress ==='Y' ?  <FormGroup>
+                            <Row>
+                            <Col lg="10" md="10" sm="10" xs="12">
+                            <BillingAddress />
+                            </Col>
+                           </Row>
+                           </FormGroup> : '';
+                           
       return (
           <Row id="LoginBlock" className="comp-block">
               <Col md="8" lg="6" className="mr-auto mx-auto">
@@ -249,6 +259,7 @@ class CardBlock extends Component {
                                 </FormGroup>
                               </Col>
                           </Row>
+                          {BillingAdd}
                       </Form>
                     </CardBody>
                 </Card>

@@ -10,9 +10,12 @@ const App = () => {
       <Router>
         <div className="container">
           <Route exact={true} path='/' component={CardBlock}  />
+          { false  ? <Route exact={true} path="/" component={BillingAddress} /> : null }
           <Route exact={true} path='/' component={SingleCardBlock} />
-          <Route exact={true} path='/creditcard' component={CardBlock}  />
+          <Route exact={true} path='/creditcard/:data' component={CardBlock}  />
           <Route exact={true} path='/singlecard' component={SingleCardBlock} />
+          <Route exact={true} path='/billingaddress' component={BillingAddress} />
+          
         </div>
       </Router>
     );

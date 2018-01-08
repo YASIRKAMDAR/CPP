@@ -3,7 +3,8 @@ import { cardTypeImages} from "../config/card/type.js"
 
 var initialState = {
   cardtype: '',
-  cardTypeImage: cardTypeImages['']
+  cardTypeImage: cardTypeImages[''],
+  billingaddress: '',
 }
 
 export default function(state = initialState, action) {
@@ -11,7 +12,8 @@ export default function(state = initialState, action) {
       case CARDPOST:
         return Object.assign({}, state, {
             cardtype: action.payload._ekv,
-            cardTypeImage: cardTypeImages[action.payload._ekv]
+            cardTypeImage: cardTypeImages[action.payload._ekv],
+            billingaddress:action.payload._ekt
           });
       case CARDKEYPRESS:
         return Object.assign({}, state, {

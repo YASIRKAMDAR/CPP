@@ -52,3 +52,10 @@ export var cardTypeImages = {
    "VISA CREDIT":"https://fly10.ek.aero/english/images/18_Card_Visa_tcm233-1853589.png",
    "MAESTRO":"https://fly10.emirates.com/english/images/15_Card_Maestro_tcm233-1853596.png"
 }
+
+export var CountryInfo = [
+        {"id": 1, "Name": "India","Description": " india Description","states" : [{"id": 11, "Name": "UP","Description": " UP Description"},{"id": 12, "Name": "MP","Description": " MP Description"}] },
+        {"id": 2, "Name": "UAE","Description": " UAE Description","states" : [{"id": 11, "Name": "Dubai","Description": " Dubai Description"},{"id": 12, "Name": "ABU Dhabi","Description": " Abu dhabi Description"}]},
+        {"id": 3, "Name": "USA","Description": " USA Description","states" : [{"id": 11, "Name": "USA1","Description": " USA1 Description"},{"id": 12, "Name": "USA2","Description": " USA2 Description"}]},
+        {"id": 4, "Name": "UK","Description": " UK Description","states" : [{"id": 11, "Name": "UK1","Description": " UK1 Description"},{"id": 12, "Name": "UK2","Description": " UK2 Description"}]},
+    ];

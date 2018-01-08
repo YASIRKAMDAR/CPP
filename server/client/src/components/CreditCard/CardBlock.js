@@ -196,7 +196,6 @@ class CardBlock extends Component {
      var ele = e.target;
      ele.setAttribute('placeholder', ele.getAttribute('resetplaceholder'));
    }
-
   render() {
     var BillingAdd =this.props.creditcard.billingaddress ==='Y' ?  <FormGroup>
                             <Row>
@@ -229,7 +228,6 @@ class CardBlock extends Component {
                                   <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
                                 </Col>
                               </Row>
-
                           </FormGroup>
                           <Row>
                               <Col sm="6">

@@ -8,7 +8,17 @@ body, .container, #LoginBlock .card {
 .error.form-group img.cardLogo {
     margin-top: 25px;
 }
+img.cardLogo.small {
+  position: absolute;
+  margin-top: 12px;
+}
 
+.error.form-group img.cardLogo.small{
+  margin-top: 12px;
+}
+.cardcol input {
+  padding-left: 22px;
+}
 .container
 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

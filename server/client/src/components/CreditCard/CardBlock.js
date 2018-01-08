@@ -193,7 +193,6 @@ class CardBlock extends Component {
      var ele = e.target;
      ele.setAttribute('placeholder', ele.getAttribute('resetplaceholder'));
    }
-
   render() {
       return (
           <Row id="LoginBlock" className="comp-block">
@@ -218,7 +217,6 @@ class CardBlock extends Component {
                                   <Label for="cardnumber" className="font-italic helper-label">Card Number</Label>
                                 </Col>
                               </Row>
-
                           </FormGroup>
                           <Row>
                               <Col sm="6">
